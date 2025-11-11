@@ -1,3 +1,7 @@
+<script setup>
+import ChatBot from './components/ChatBot.vue'
+</script>
+
 <template>
   <div class="app">
     <h1 class="title">💬 Chatbot de Asistencia Inteligente</h1>
@@ -5,9 +9,6 @@
   </div>
 </template>
 
-<script setup>
-import ChatBot from './components/ChatBot.vue'
-</script>
 
 <style scoped>
 .app {
