@@ -10,7 +10,7 @@ const server = http.createServer(app);
 const io = new Server(server, {
 cors: {
   origin: 'http://localhost:5173',
-  methods: ['GET', 'POST'],
+  methods: ['*'],
 },
 });
 
@@ -47,7 +47,7 @@ try {
     return respuesta;
   }
 
-  if (texto.includes('seguro') || texto.includes('obra social') || texto.include('seguros') || texto.include('obras sociales')) {
+  if (texto.includes('seguro') || texto.includes('obra social') || texto.includes('seguros') || texto.includes('obras sociales')) {
     const [rows] = await db.query("SELECT nombre_seguro FROM seguros");
     if (rows.length === 0) return "No tenemos seguros cargados.";
 
@@ -63,8 +63,8 @@ try {
     return `Ofrecemos las siguientes especialidades: ${lista}.`;
   }
 
-  if (texto.includes('medico') || texto.includes('doctor') || texto.includes('doctores') || texto.includes('medicos')) {
-      const [rows] = await db.query("SELECT nombre, especialidad FROM medicos");
+  if (texto.includes('medico') || texto.includes('doctor') || texto.includes('doctores') || texto.includes('medicos') || texto.includes('médicos')) {
+    const [rows] = await db.query("SELECT DISTINCT nombre, especialidad FROM medicos");
       if (rows.length === 0) return "No tenemos médicos en el sistema.";
 
       let respuesta = "Nuestro equipo de médicos es: ";
@@ -78,7 +78,6 @@ try {
     return '¡Hola! Soy el asistente de la clínica. Puedes consultar sobre horarios, seguros o especialidades.';
   }
 
-  // --- RESPUESTA POR DEFECTO [cite: 17] ---
   return 'No entiendo tu pregunta. Puedes consultar sobre horarios, seguros, médicos o especialidades.';
 
 } catch (err) {
@@ -89,15 +88,11 @@ try {
 
 // 7. Escuchar conexiones de Socket.IO (¡MODIFICADO!)
 io.on('connection', (socket) => {
-console.log('Usuario conectado:', socket.id);
-
+console.log('Usuario conectado:');
+  socket.removeAllListeners('pregunta');
 // Cuando el cliente envía una pregunta
-socket.on('pregunta', async (data) => { // <-- 7a. Se añade 'async'
-
-  // 7b. Se añade 'await' para esperar la respuesta de la BD
+socket.on('pregunta', async (data) => {
   const respuesta = await procesarPreguntaClinica(data.pregunta);
-
-  // Guardar la conversación en la BD (Esto sigue igual que el PPT)
   const sql = 'INSERT INTO registros_chat (pregunta, respuesta) VALUES (?, ?)';
   try {
     await db.query(sql, [data.pregunta, respuesta]);
@@ -110,13 +105,12 @@ socket.on('pregunta', async (data) => { // <-- 7a. Se añade 'async'
   socket.emit('respuesta', { mensaje: respuesta });
 });
 
-// Cuando un usuario se desconecta
 socket.on('disconnect', () => {
   console.log('Usuario desconectado:', socket.id);
 });
 });
 
-// 8. Iniciar el servidor
+// Iniciar el servidor
 const PORT = 3000;
 server.listen(PORT, () => {
 console.log(`Servidor escuchando en http://localhost:${PORT}`);

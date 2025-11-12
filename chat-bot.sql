@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-11-2025 a las 19:04:38
+-- Tiempo de generación: 12-11-2025 a las 13:34:11
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -66,9 +66,67 @@ INSERT INTO `medicos` (`id`, `nombre`, `especialidad`) VALUES
 (1, 'Dra. Ana Pérez', 'Cardiología'),
 (2, 'Dr. Luis Gómez', 'Dermatología'),
 (3, 'Dr. Carlos Solís', 'Pediatría'),
-(4, 'Dra. Ana Pérez', 'Cardiología'),
-(5, 'Dr. Luis Gómez', 'Dermatología'),
-(6, 'Dr. Carlos Solís', 'Pediatría');
+(10, 'Dra. Marta López', 'Neurología'),
+(11, 'Dr. Javier Fernández', 'Traumatología');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `registros_chat`
+--
+
+CREATE TABLE `registros_chat` (
+  `id` int(11) NOT NULL,
+  `pregunta` varchar(255) DEFAULT NULL,
+  `respuesta` varchar(255) DEFAULT NULL,
+  `fecha` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `registros_chat`
+--
+
+INSERT INTO `registros_chat` (`id`, `pregunta`, `respuesta`, `fecha`) VALUES
+(1, 'hola', '¡Hola! Soy el asistente de la clínica. Puedes consultar sobre horarios, seguros o especialidades.', '2025-11-12 11:44:47'),
+(2, 'seguros', 'Aceptamos los siguientes seguros: Galeno, OSDE, PAMI, Swiss Medical.', '2025-11-12 11:44:55'),
+(3, 'Obras Sociales', 'Aceptamos los siguientes seguros: Galeno, OSDE, PAMI, Swiss Medical.', '2025-11-12 11:45:09'),
+(4, 'especialidades', 'Ofrecemos las siguientes especialidades: Cardiología, Dermatología, Pediatría.', '2025-11-12 11:45:30'),
+(5, 'especialidad', 'Ofrecemos las siguientes especialidades: Cardiología, Dermatología, Pediatría.', '2025-11-12 11:45:46'),
+(6, 'horarios', 'Nuestros horarios son: D(a). Dr. Carlos Solís: Viernes de 08:00 a 12:00. D(a). Dr. Luis Gómez: Jueves de 10:00 a 16:00. D(a). Dr. Luis Gómez: Martes de 10:00 a 16:00. D(a). Dra. Ana Pérez: Miércoles de 14:00 a 18:00. D(a). Dra. Ana Pérez: Lunes de 09:00 a', '2025-11-12 11:46:29'),
+(7, 'medicos', 'Nuestro equipo de médicos es: Dra. Ana Pérez (Cardiología). Dr. Luis Gómez (Dermatología). Dr. Carlos Solís (Pediatría). Dra. Ana Pérez (Cardiología). Dr. Luis Gómez (Dermatología). Dr. Carlos Solís (Pediatría). ', '2025-11-12 11:46:51'),
+(8, 'médicos', 'No entiendo tu pregunta. Puedes consultar sobre horarios, seguros, médicos o especialidades.', '2025-11-12 11:47:20'),
+(9, 'médicos', 'No entiendo tu pregunta. Puedes consultar sobre horarios, seguros, médicos o especialidades.', '2025-11-12 11:49:32'),
+(10, 'médicos', 'Nuestro equipo de médicos es: Dra. Ana Pérez (Cardiología). Dr. Luis Gómez (Dermatología). Dr. Carlos Solís (Pediatría). Dra. Ana Pérez (Cardiología). Dr. Luis Gómez (Dermatología). Dr. Carlos Solís (Pediatría). ', '2025-11-12 11:50:02'),
+(11, 'hola', '¡Hola! Soy el asistente de la clínica. Puedes consultar sobre horarios, seguros o especialidades.', '2025-11-12 11:54:40'),
+(12, 'horarios', 'Nuestros horarios son: D(a). Dr. Carlos Solís: Viernes de 08:00 a 12:00. D(a). Dr. Luis Gómez: Jueves de 10:00 a 16:00. D(a). Dr. Luis Gómez: Martes de 10:00 a 16:00. D(a). Dra. Ana Pérez: Miércoles de 14:00 a 18:00. D(a). Dra. Ana Pérez: Lunes de 09:00 a', '2025-11-12 11:54:48'),
+(13, 'medicos', 'Nuestro equipo de médicos es: Dra. Ana Pérez (Cardiología). Dr. Luis Gómez (Dermatología). Dr. Carlos Solís (Pediatría). Dra. Ana Pérez (Cardiología). Dr. Luis Gómez (Dermatología). Dr. Carlos Solís (Pediatría). ', '2025-11-12 11:55:23'),
+(14, 'hola', '¡Hola! Soy el asistente de la clínica. Puedes consultar sobre horarios, seguros o especialidades.', '2025-11-12 11:58:08'),
+(15, 'especialidades', 'Ofrecemos las siguientes especialidades: Cardiología, Dermatología, Pediatría.', '2025-11-12 11:58:16'),
+(16, 'doctores', 'Nuestro equipo de médicos es: Dra. Ana Pérez (Cardiología). Dr. Luis Gómez (Dermatología). Dr. Carlos Solís (Pediatría). Dra. Ana Pérez (Cardiología). Dr. Luis Gómez (Dermatología). Dr. Carlos Solís (Pediatría). ', '2025-11-12 11:58:24'),
+(17, 'hola', '¡Hola! Soy el asistente de la clínica. Puedes consultar sobre horarios, seguros o especialidades.', '2025-11-12 12:00:59'),
+(18, 'doctor', 'Nuestro equipo de médicos es: Dra. Ana Pérez (Cardiología). Dr. Luis Gómez (Dermatología). Dr. Carlos Solís (Pediatría). Dra. Ana Pérez (Cardiología). Dr. Luis Gómez (Dermatología). Dr. Carlos Solís (Pediatría). ', '2025-11-12 12:01:06'),
+(19, 'hola', '¡Hola! Soy el asistente de la clínica. Puedes consultar sobre horarios, seguros o especialidades.', '2025-11-12 12:09:20'),
+(20, 'doctor', 'Nuestro equipo de médicos es: Dra. Ana Pérez (Cardiología). Dr. Luis Gómez (Dermatología). Dr. Carlos Solís (Pediatría). Dra. Ana Pérez (Cardiología). Dr. Luis Gómez (Dermatología). Dr. Carlos Solís (Pediatría). ', '2025-11-12 12:09:24'),
+(21, 'hola', '¡Hola! Soy el asistente de la clínica. Puedes consultar sobre horarios, seguros o especialidades.', '2025-11-12 12:10:12'),
+(22, 'horarios', 'Nuestros horarios son: D(a). Dr. Carlos Solís: Viernes de 08:00 a 12:00. D(a). Dr. Luis Gómez: Jueves de 10:00 a 16:00. D(a). Dr. Luis Gómez: Martes de 10:00 a 16:00. D(a). Dra. Ana Pérez: Miércoles de 14:00 a 18:00. D(a). Dra. Ana Pérez: Lunes de 09:00 a', '2025-11-12 12:10:19'),
+(23, 'doctor', 'Nuestro equipo de médicos es: Dra. Ana Pérez (Cardiología). Dr. Luis Gómez (Dermatología). Dr. Carlos Solís (Pediatría). Dra. Ana Pérez (Cardiología). Dr. Luis Gómez (Dermatología). Dr. Carlos Solís (Pediatría). ', '2025-11-12 12:10:28'),
+(24, 'hola', '¡Hola! Soy el asistente de la clínica. Puedes consultar sobre horarios, seguros o especialidades.', '2025-11-12 12:15:07'),
+(25, 'horarios', 'Nuestros horarios son: D(a). Dr. Carlos Solís: Viernes de 08:00 a 12:00. D(a). Dr. Luis Gómez: Jueves de 10:00 a 16:00. D(a). Dr. Luis Gómez: Martes de 10:00 a 16:00. D(a). Dra. Ana Pérez: Miércoles de 14:00 a 18:00. D(a). Dra. Ana Pérez: Lunes de 09:00 a', '2025-11-12 12:15:13'),
+(26, 'doctor', 'Nuestro equipo de médicos es: Dra. Ana Pérez (Cardiología). Dr. Luis Gómez (Dermatología). Dr. Carlos Solís (Pediatría). Dra. Ana Pérez (Cardiología). Dr. Luis Gómez (Dermatología). Dr. Carlos Solís (Pediatría). ', '2025-11-12 12:15:18'),
+(27, 'hola', '¡Hola! Soy el asistente de la clínica. Puedes consultar sobre horarios, seguros o especialidades.', '2025-11-12 12:16:03'),
+(28, 'obras sociales', 'Aceptamos los siguientes seguros: Galeno, OSDE, PAMI, Swiss Medical.', '2025-11-12 12:16:15'),
+(29, 'doctor', 'Nuestro equipo de médicos es: Dra. Ana Pérez (Cardiología). Dr. Luis Gómez (Dermatología). Dr. Carlos Solís (Pediatría). Dra. Ana Pérez (Cardiología). Dr. Luis Gómez (Dermatología). Dr. Carlos Solís (Pediatría). ', '2025-11-12 12:16:32'),
+(30, 'horarios', 'Nuestros horarios son: D(a). Dr. Carlos Solís: Viernes de 08:00 a 12:00. D(a). Dr. Luis Gómez: Jueves de 10:00 a 16:00. D(a). Dr. Luis Gómez: Martes de 10:00 a 16:00. D(a). Dra. Ana Pérez: Miércoles de 14:00 a 18:00. D(a). Dra. Ana Pérez: Lunes de 09:00 a', '2025-11-12 12:16:42'),
+(31, 'hola', '¡Hola! Soy el asistente de la clínica. Puedes consultar sobre horarios, seguros o especialidades.', '2025-11-12 12:20:28'),
+(32, 'horarios', 'Nuestros horarios son: D(a). Dr. Carlos Solís: Viernes de 08:00 a 12:00. D(a). Dr. Luis Gómez: Jueves de 10:00 a 16:00. D(a). Dr. Luis Gómez: Martes de 10:00 a 16:00. D(a). Dra. Ana Pérez: Miércoles de 14:00 a 18:00. D(a). Dra. Ana Pérez: Lunes de 09:00 a', '2025-11-12 12:20:32'),
+(33, 'medicos', 'Nuestro equipo de médicos es: Dra. Ana Pérez (Cardiología). Dr. Luis Gómez (Dermatología). Dr. Carlos Solís (Pediatría). Dra. Ana Pérez (Cardiología). Dr. Luis Gómez (Dermatología). Dr. Carlos Solís (Pediatría). ', '2025-11-12 12:20:38'),
+(34, 'medicos', 'Nuestro equipo de médicos es: Dra. Ana Pérez (Cardiología). Dr. Luis Gómez (Dermatología). Dr. Carlos Solís (Pediatría). Dra. Ana Pérez (Cardiología). Dr. Luis Gómez (Dermatología). Dr. Carlos Solís (Pediatría). ', '2025-11-12 12:24:19'),
+(35, 'hola', '¡Hola! Soy el asistente de la clínica. Puedes consultar sobre horarios, seguros o especialidades.', '2025-11-12 12:28:09'),
+(36, 'holaaaa', '¡Hola! Soy el asistente de la clínica. Puedes consultar sobre horarios, seguros o especialidades.', '2025-11-12 12:28:16'),
+(37, 'medicos', 'Nuestro equipo de médicos es: Dra. Ana Pérez (Cardiología). Dr. Luis Gómez (Dermatología). Dr. Carlos Solís (Pediatría). Dra. Ana Pérez (Cardiología). Dr. Luis Gómez (Dermatología). Dr. Carlos Solís (Pediatría). Dra. Marta López (Neurología). Dr. Javier F', '2025-11-12 12:28:25'),
+(38, 'hol', 'No entiendo tu pregunta. Puedes consultar sobre horarios, seguros, médicos o especialidades.', '2025-11-12 12:31:15'),
+(39, 'hola', '¡Hola! Soy el asistente de la clínica. Puedes consultar sobre horarios, seguros o especialidades.', '2025-11-12 12:31:20'),
+(40, 'doctor', 'Nuestro equipo de médicos es: Dra. Ana Pérez (Cardiología). Dr. Luis Gómez (Dermatología). Dr. Carlos Solís (Pediatría). Dra. Marta López (Neurología). Dr. Javier Fernández (Traumatología). ', '2025-11-12 12:31:24');
 
 -- --------------------------------------------------------
 
@@ -109,6 +167,12 @@ ALTER TABLE `medicos`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `registros_chat`
+--
+ALTER TABLE `registros_chat`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `seguros`
 --
 ALTER TABLE `seguros`
@@ -129,7 +193,13 @@ ALTER TABLE `horarios`
 -- AUTO_INCREMENT de la tabla `medicos`
 --
 ALTER TABLE `medicos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT de la tabla `registros_chat`
+--
+ALTER TABLE `registros_chat`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT de la tabla `seguros`

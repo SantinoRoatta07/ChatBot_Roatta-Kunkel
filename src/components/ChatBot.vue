@@ -1,32 +1,30 @@
 <script setup>
 import { ref, onMounted, nextTick } from 'vue'
-import { io } from 'socket.io-client' // [cite: 4]
+import socket from '../socket.js';
 
-const socket = io('http://localhost:3000') // [cite: 5]
-const conversacion = ref([]) //
-const pregunta = ref('')     //
-const chatBox = ref(null)    // (Tu mejora para el scroll)
-
+const conversacion = ref([])
+const pregunta = ref('')
+const chatBox = ref(null) // para hacer scroll automático
 onMounted(() => {
-  socket.on('respuesta', async (data) => { //
-    conversacion.value.push({ tipo: 'asistente', mensaje: data.mensaje }) // [cite: 13]
 
+  socket.off('respuesta')
+
+  socket.on('respuesta', async (data) => {
+    conversacion.value.push({ tipo: 'asistente', mensaje: data.mensaje })
     await nextTick()
     scrollToBottom()
   })
 })
 
-const RealizarPregunta = async () => { // [cite: 9]
+const RealizarPregunta = async () => {
   if (!pregunta.value.trim()) return
 
   const mensajeUsuario = pregunta.value
+  conversacion.value.push({ tipo: 'usuario', mensaje: mensajeUsuario })
 
-  conversacion.value.push({ tipo: 'usuario', mensaje: mensajeUsuario }) // [cite: 10]
+  socket.emit('pregunta', { pregunta: mensajeUsuario })
 
-  socket.emit('pregunta', { pregunta: mensajeUsuario }) //
-
-  pregunta.value = '' // Limpiamos el input
-
+  pregunta.value = '' // limpiar el input
   await nextTick()
   scrollToBottom()
 }
@@ -38,27 +36,35 @@ const scrollToBottom = () => {
 }
 </script>
 
-  <template>
+<template>
   <div class="chat-container">
-
     <div class="chat-box" ref="chatBox">
-
-      <div v-for="(msg, index) in conversacion"
-           :key="index"
-           :class="['mensaje', msg.tipo === 'usuario' ? 'usuario' : 'bot']"
-      > <p class="sender-label">{{ msg.tipo === 'usuario' ? 'Tú:' : 'Asistente:' }}</p> {{ msg.mensaje }} </div>
+      <div
+        v-for="(msg, index) in conversacion"
+        :key="index"
+        :class="['mensaje', msg.tipo === 'usuario' ? 'usuario' : 'bot']"
+      >
+        <p class="sender-label">
+          {{ msg.tipo === 'usuario' ? 'Tú:' : 'Asistente:' }}
+        </p>
+        {{ msg.mensaje }}
+      </div>
     </div>
 
-    <form @submit.prevent="RealizarPregunta" class="input-area"> <input
-        v-model="pregunta" type="text"
-        placeholder="Escribe tu mensaje..." required
+    <form @submit.prevent="RealizarPregunta" class="input-area">
+      <input
+        v-model="pregunta"
+        type="text"
+        placeholder="Escribe tu mensaje..."
+        required
       />
-      <button type->Enviar</button> </form>
+      <!-- 🔧 aquí estaba el error: type->  debe ser type="submit" -->
+      <button type="submit">Enviar</button>
+    </form>
   </div>
 </template>
 
 <style scoped>
-/* Estilos mejorados, basados en tu estructura de clases */
 .chat-container {
   max-width: 600px;
   margin: 2rem auto;
@@ -69,14 +75,6 @@ const scrollToBottom = () => {
   display: flex;
   flex-direction: column;
   height: 80vh;
-}
-
-h1 {
-  text-align: center;
-  padding: 1rem;
-  margin: 0;
-  border-bottom: 1px solid #ddd;
-  background-color: #f9f9f9;
 }
 
 .chat-box {
@@ -94,21 +92,21 @@ h1 {
   line-height: 1.4;
 }
 
-.mensaje p {
+.sender-label {
   margin: 0 0 5px 0;
   font-weight: bold;
   font-size: 0.9rem;
 }
 
 .mensaje.usuario {
-  background-color: #e1f5fe; /* Azul claro (como en PPTX) */
+  background-color: #e1f5fe;
   color: #333;
   margin-left: auto;
-  text-align: left; /* Alineado a la izquierda dentro de la burbuja */
+  text-align: left;
 }
 
 .mensaje.bot {
-  background-color: #e8f5e9; /* Verde claro (como en PPTX) */
+  background-color: #e8f5e9;
   color: #333;
   margin-right: auto;
   text-align: left;
