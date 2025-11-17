@@ -10,7 +10,7 @@ const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
     origin: 'http://localhost:5173',
-    methods: ['*'],
+    methods: ['get', 'post'],
   },
 });
 
@@ -20,7 +20,7 @@ app.use(express.json());
 const db = mysql.createPool({
   host: 'localhost',
   user: 'root',
-  password: '', // Tu contraseña de MySQL
+  password: '',
   database: 'chat-bot',
   waitForConnections: true,
   connectionLimit: 10,

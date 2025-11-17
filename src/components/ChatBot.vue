@@ -24,7 +24,7 @@ const RealizarPregunta = async () => {
 
   socket.emit('pregunta', { pregunta: mensajeUsuario })
 
-  pregunta.value = '' // limpiar el input
+  pregunta.value = ''
   await nextTick()
   scrollToBottom()
 }
@@ -58,7 +58,6 @@ const scrollToBottom = () => {
         placeholder="Escribe tu mensaje..."
         required
       />
-      <!-- 🔧 aquí estaba el error: type->  debe ser type="submit" -->
       <button type="submit">Enviar</button>
     </form>
   </div>

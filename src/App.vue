@@ -49,7 +49,7 @@ import ChatBot from './components/ChatBot.vue'
 
   margin-bottom: 1.8rem;
 
-  
+
   opacity: 0;
   transform: translateY(-12px) scale(0.98);
   animation: titleReveal 0.8s ease forwards;
